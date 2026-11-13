@@ -8,5 +8,5 @@ export default async function ContractorSectionPage({ params }: PageProps<"/cont
     equipos: "Cargar documentos asociados a los equipos/herramientas",
   };
   const title = labels[seccion] ?? "Sección de contratistas";
-  return <section className="min-h-[100px] border-[3px] border-[#1d4778] bg-white p-5 text-xl text-[#174579]">{title}</section>;
+  return <section className="min-h-[100px] border-[3px] border-[#f0dc00] bg-[#ffffff] p-5 text-xl text-[#23354a]">{title}</section>;
 }

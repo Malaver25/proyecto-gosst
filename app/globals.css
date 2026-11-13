@@ -1,1 +1,53 @@
 @import "tailwindcss";
+
+.contractor-sidebar > a {
+  min-height: 76px;
+  padding: 13px 18px;
+  font-size: 18px;
+  line-height: 24px;
+  color: #23354a;
+}
+
+.contractor-sidebar > a[aria-current="page"] {
+  color: #23354a;
+}
+
+.contractor-sidebar > a i {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  font-size: 16px;
+}
+
+.contractor-sidebar .sidebar-group {
+  color: #23354a;
+  border-color: #d5dbe1;
+}
+
+.contractor-sidebar .sidebar-group[data-active="true"] {
+  color: #23354a;
+  background: #fff8bd;
+  border-color: #f0dc00;
+}
+
+.contractor-sidebar .communication-link {
+  color: #23354a;
+}
+
+.contractor-sidebar .communication-link[data-active="true"] {
+  color: #23354a;
+}
+
+@media (max-width: 900px) {
+  .contractor-sidebar > a {
+    min-height: 70px;
+    padding: 12px 10px;
+    font-size: 15px;
+    line-height: 21px;
+  }
+}
+
+main section,
+main a.group {
+  box-shadow: 0 10px 26px rgb(35 53 74 / 18%), 0 0 12px rgb(240 220 0 / 12%);
+}

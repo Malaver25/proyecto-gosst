@@ -1,17 +1,70 @@
-"use client";
+import Link from "next/link";
 
-import { useState } from "react";
-
-const items = ["Indicadores de la contratista", "Consolidados generales", "Panel de documentos por completar", "Verifique el acceso de sus trabajadores / vehículos"];
-function Icon({ type }: { type: number }) {
-  const cls = "h-9 w-9 fill-none stroke-white stroke-[2.5] [stroke-linecap:round] [stroke-linejoin:round]";
-  if (type === 0) return <svg className={cls} viewBox="0 0 32 32"><rect x="3" y="4" width="26" height="24" rx="2"/><path d="M3 11h26M10 4v24M20 4v24M3 19h26"/></svg>;
-  if (type === 1) return <svg className={cls} viewBox="0 0 32 32"><path d="M8 3h12l8 8v18H8zM20 3v9h8M12 17l12 10M24 17 12 27M3 11v18h5"/></svg>;
-  if (type === 2) return <svg className={cls} viewBox="0 0 32 32"><rect x="3" y="4" width="26" height="24" rx="2"/><path d="M10 4v24M3 11h26M3 19h26M6 7h1M13 7h13M6 15h1M13 15h13M6 23h1M13 23h13"/></svg>;
-  return <svg className={cls} viewBox="0 0 32 32"><path d="M17 4H5a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h22a2 2 0 0 0 2-2V12M10 16l6 6L29 8l-4-4-9 12"/></svg>;
-}
+const sections = [
+  {
+    title: "Proyectos en curso",
+    description: "Organiza la información de cada proyecto y sus documentos de seguridad.",
+    href: "/contratista/proyectos",
+    action: "Gestionar proyectos",
+    icon: "▤",
+  },
+  {
+    title: "Trabajadores",
+    description: "Consulta y completa la documentación asociada al personal.",
+    href: "/contratista/trabajadores",
+    action: "Ver trabajadores",
+    icon: "♙",
+  },
+  {
+    title: "Documentos generales",
+    description: "Mantén al día los documentos generales de la empresa contratista.",
+    href: "/contratista/documentos-generales",
+    action: "Ver documentos",
+    icon: "▧",
+  },
+  {
+    title: "Vehículos y maquinaria",
+    description: "Accede a la documentación de los vehículos y la maquinaria registrados.",
+    href: "/contratista/vehiculos",
+    action: "Ver vehículos",
+    icon: "▰",
+  },
+];
 
 export default function IndicatorsPage() {
-  const [notice, setNotice] = useState("");
-  return <><section className="border-2 border-[#1d4778] bg-white">{items.map((item, index) => <button key={item} className="flex h-[93px] w-full items-center justify-between border-b-[3px] border-[#1d4778] bg-white px-5 text-left text-[24px] text-[#174579] hover:bg-[#f8faff] last:border-b-0 max-[900px]:h-[80px] max-[900px]:text-[19px] max-[600px]:h-[68px] max-[600px]:px-[10px] max-[600px]:text-[16px]" onClick={() => setNotice(`${item} seleccionado`)}><span>{item}</span><i className="ml-[18px] grid h-[52px] w-[55px] shrink-0 place-items-center rounded-[5px] bg-[#1d4778] max-[900px]:h-[44px] max-[900px]:w-[46px] max-[600px]:h-10 max-[600px]:w-10"><Icon type={index}/></i></button>)}</section><div className="absolute bottom-[13%] left-[46%] grid h-[155px] w-[155px] place-content-center rounded-[10px] bg-[#ececec] text-center text-white opacity-90 max-[900px]:hidden"><span className="text-[76px] leading-[68px]">⌨</span><small className="text-[24px]">ABC,</small></div>{notice && <div role="status" className="fixed bottom-6 right-6 z-10 rounded bg-[#1d4778] px-4 py-3 text-white shadow-lg">{notice}<button className="ml-4 text-lg" onClick={() => setNotice("")}>×</button></div>}</>;
+  return (
+    <div className="space-y-4">
+      <section className="border-2 border-[#f0dc00] bg-[#ffffff] p-6 max-[600px]:p-4">
+        <p className="text-sm font-semibold uppercase tracking-[0.12em] text-[#5d6876]">
+          Panel de control
+        </p>
+        <h1 className="mt-1 text-[28px] font-semibold text-[#23354a] max-[600px]:text-xl">
+          Indicadores de la contratista
+        </h1>
+        <p className="mt-2 max-w-2xl text-sm leading-6 text-[#5d6876]">
+          Accede a las secciones de gestión para revisar proyectos y completar la
+          documentación de la empresa.
+        </p>
+      </section>
+
+      <section aria-label="Secciones de gestión" className="grid grid-cols-2 gap-3 max-[700px]:grid-cols-1">
+        {sections.map((section) => (
+          <Link
+            key={section.href}
+            href={section.href}
+            className="group flex min-h-[164px] flex-col border border-[#e0e4e8] border-l-4 border-l-[#f0dc00] bg-[#ffffff] p-5 transition-colors hover:bg-[#f7f8fa] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f0dc00]"
+          >
+            <span aria-hidden="true" className="grid h-10 w-10 place-items-center rounded bg-[#f7f8fa] text-xl font-semibold text-[#f0dc00]">
+              {section.icon}
+            </span>
+            <span className="mt-3 text-lg font-semibold text-[#23354a]">{section.title}</span>
+            <span className="mt-1 flex-1 text-sm leading-5 text-[#5d6876]">{section.description}</span>
+            <span className="mt-4 text-sm font-semibold text-[#f0dc00] group-hover:underline">
+              {section.action} <span aria-hidden="true">→</span>
+            </span>
+          </Link>
+        ))}
+      </section>
+    </div>
+  );
 }
